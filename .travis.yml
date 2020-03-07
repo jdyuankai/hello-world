@@ -1,3 +1,4 @@
 script:
   - git config user.name
   - git config user.email
+  - echo "after printed git account"
