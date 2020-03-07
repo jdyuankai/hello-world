@@ -2,3 +2,7 @@ script:
   - git config user.name
   - git config user.email
   - echo "after printed git account"
+  - build_head=$(git rev-parse HEAD)
+  - echo $build_head
+  - echo $TRAVIS_BRANCH
+  - git diff $build_head $TRAVIS_BRANCH
