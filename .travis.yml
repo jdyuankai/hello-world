@@ -7,3 +7,5 @@ script:
   - echo $build_head
   - echo $TRAVIS_BRANCH
   - git diff $build_head $TRAVIS_BRANCH
+  - echo $TRAVIS_PULL_REQUEST_BRANCH
+  - echo $TRAVIS_PULL_REQUEST
