@@ -17,10 +17,10 @@ script:
   - GET repo/{repository.id}/branch/{branch.name}
   - echo $test_branch
   - command=(if [[ $TRAVIS_PULL_REQUEST == false ]] return $TRAVIS_BRANCH elif return $TRAVIS_PULL_REQUEST_BRANCH)
-  - |
-    if [ ${TRAVIS_PULL_REQUEST} == false ]; then
-      echo "do script"
-    elif
-      echo "do push script"
-    fi
+  -  |
+     if [ ${TRAVIS_PULL_REQUEST} == false ]; then
+       echo "do script"
+     elif
+       echo "do push script"
+     fi
     
