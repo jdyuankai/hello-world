@@ -19,9 +19,9 @@ script:
   - echo $objBranch
   - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./iri-regression-tests/
   - cd iri-regression-tests
-  - git ls-remote|grep -Ec patch
+  - git ls-remote|grep -E patch|grep -c
   - list=$(git ls-remote)
-  - count=${grep -Ec $list}
+  - count=${grep -E $list}
   - echo $count
   - echo $TRAVIS_PULL_REQUEST_BRANCH count is $branchCount
   -  |
