@@ -1,12 +1,6 @@
 install: true
 
 script:
-  - exists=`git show-ref refs/heads/jdyuankai` || true
-  - |
-    if [ -n "$exists" ]; then
-      echo 'branch exists!'
-    fi
-  - echo $?
   - git ls-remote
   - git config user.name
   - git config user.email
@@ -28,15 +22,20 @@ script:
   - git ls-remote | grep -E merge | grep -c merge
   - echo $objBranch
   - echo $TRAVIS_PULL_REQUEST_BRANCH count is $branchCount
+  - exists=`git show-ref refs/heads/$objBranch` || true
+  - |
+    if [ -n "$exists" ]; then
+      export existBranch=true
+    fi
   -  |
-     if [ ${TRAVIS_PULL_REQUEST} != false ]; then
+     if [ ${existBranch} == true ]; then
        echo pr will merge $objBranch to master if existed
        git checkout $objBranch
        git checkout master
-       git merge master
+       git merge $objBranch || true
      fi
   -  |
-     if [ ${TRAVIS_PULL_REQUEST} == false ]; then
+     if [ ${existBranch} == false ]; then
        echo push will checkout $objBranch
        git checkout $objBranch
      fi
