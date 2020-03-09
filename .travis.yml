@@ -20,7 +20,5 @@ script:
   -  |
      if [ ${TRAVIS_PULL_REQUEST} == false ]; then
        echo "do script"
-     elif
-       echo "do push script"
      fi
     
