@@ -1,7 +1,11 @@
 install: true
 
 script:
-  - rst=$(git show-ref --verify --quiet refs/heads/master)
+  - exists=`git show-ref refs/heads/<branch-name>`
+  - |
+    if [ -n "$exists" ]; then
+      echo 'branch exists!'
+    fi
   - echo $?
   - git ls-remote
   - git config user.name
