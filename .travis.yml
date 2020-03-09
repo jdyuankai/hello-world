@@ -13,3 +13,6 @@ script:
   - echo $TRAVIS_PULL_REQUEST_BRANCH
   - echo $TRAVIS_PULL_REQUEST
   - content=(GET repo/jdyuankai/branch/$TRAVIS_PULL_REQUEST_BRANCH)
+  - echo content
+  - GET repo/jdyuankai/branch/{$TRAVIS_PULL_REQUEST_BRANCH}
+  - GET repo/{repository.id}/branch/{branch.name}
