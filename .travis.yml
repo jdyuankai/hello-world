@@ -17,9 +17,10 @@ script:
        objBranch=${TRAVIS_PULL_REQUEST_BRANCH}
      fi
   - echo $objBranch
-  - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./
+  - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./iri-regression-tests/
   - cd iri-regression-tests
-  - branchCount=(git ls-remote | grep -Ec '${TRAVIS_PULL_REQUEST_BRANCH}')
+  - branchCount=(`git ls-remote | grep -Ec '${TRAVIS_PULL_REQUEST_BRANCH}'`)
+  - echo '$TRAVIS_PULL_REQUEST_BRANCH count is : ', $branchCount
   -  |
      if [ $branchCount > 0 ]; then
        git checkout ${TRAVIS_PULL_REQUEST_BRANCH}
