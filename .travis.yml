@@ -11,14 +11,9 @@ script:
   - git diff $build_head $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST_BRANCH
   - echo $TRAVIS_PULL_REQUEST
-  - content=(GET repo/jdyuankai/branch/$TRAVIS_PULL_REQUEST_BRANCH)
-  - echo content
-  - GET repo/jdyuankai/branch/{$TRAVIS_PULL_REQUEST_BRANCH}
-  - GET repo/{repository.id}/branch/{branch.name}
-  - echo $test_branch
-  - command=(if [[ $TRAVIS_PULL_REQUEST == false ]] return $TRAVIS_BRANCH elif return $TRAVIS_PULL_REQUEST_BRANCH)
+  - objBranch=$TRAVIS_BRANCH
   -  |
-     if [ ${TRAVIS_PULL_REQUEST} == false ]; then
-       echo "do script"
+     if [ ${TRAVIS_PULL_REQUEST} != false ]; then
+       objBranch=${TRAVIS_PULL_REQUEST_BRANCH}
      fi
-    
+  - echo $objBranch
