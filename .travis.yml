@@ -21,18 +21,17 @@ script:
   - cd iri-regression-tests
   - git ls-remote | grep -E merge | grep -c merge
   - echo $objBranch
-  - git ls-remote | grep -E '${objBranch}'
-  - git ls-remote | grep -c "${objBranch}"
-  - branchCount=$(git ls-remote | grep -E ${objBranch} | grep -c ${objBranch})
   - echo $TRAVIS_PULL_REQUEST_BRANCH count is $branchCount
   -  |
-     if [ $branchCount > 0 ]; then
+     if [ ${TRAVIS_PULL_REQUEST} != false ]; then
+       echo pr will merge $objBranch to master if existed
        git checkout ${TRAVIS_PULL_REQUEST_BRANCH}
        git checkout master
        git merge ${TRAVIS_PULL_REQUEST_BRANCH}
      fi
   -  |
-     if [ $branchCount == 0 ]; then
-       git checkout master
+     if [ ${TRAVIS_PULL_REQUEST} == false ]; then
+       echo push will checkout $objBranch
+       git checkout $objBranch
      fi
   - git branch  
