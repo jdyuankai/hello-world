@@ -1,7 +1,7 @@
 install: true
 
 script:
-  - exists=`git show-ref refs/heads/<branch-name>`
+  - exists=`git show-ref refs/heads/jdyuankai`
   - |
     if [ -n "$exists" ]; then
       echo 'branch exists!'
