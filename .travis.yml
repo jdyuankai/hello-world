@@ -1,7 +1,7 @@
 install: true
 
 script:
-  - git show-ref --verify --quiet refs/heads/master
+  - rst=$(git show-ref --verify --quiet refs/heads/master)
   - echo $?
   - git ls-remote
   - git config user.name
