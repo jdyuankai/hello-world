@@ -19,9 +19,8 @@ script:
   - echo $objBranch
   - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./iri-regression-tests/
   - cd iri-regression-tests
-  - git ls-remote | grep -Ec $objBranch
-  - git ls-remote | grep -E $objBranch | grep -c
-  - git ls-remote | grep -E $objBranch
+  - git ls-remote | grep -E $objBranch | grep -c $objBranch
+  - branchCount=$(git ls-remote | grep -E $objBranch | grep -c $objBranch)
   - echo $TRAVIS_PULL_REQUEST_BRANCH count is $branchCount
   -  |
      if [ $branchCount > 0 ]; then
