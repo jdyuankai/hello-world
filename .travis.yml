@@ -17,3 +17,17 @@ script:
        objBranch=${TRAVIS_PULL_REQUEST_BRANCH}
      fi
   - echo $objBranch
+  - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./
+  - cd iri-regression-tests
+  - branchCount=(git ls-remote | grep -Ec '${TRAVIS_PULL_REQUEST_BRANCH}')
+  - |
+    if [ $branchCount > 0 ];
+      git checkout ${TRAVIS_PULL_REQUEST_BRANCH}
+      git checkout master
+      git merge ${TRAVIS_PULL_REQUEST_BRANCH}
+    fi
+  - |
+    if [ $branchCount == 0 ];
+      git checkout master
+    fi
+  - git branch  
