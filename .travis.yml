@@ -1,3 +1,6 @@
+install:
+  - sudo apt-get install libwww-perl
+
 script:
   - git ls-remote
   - git config user.name
