@@ -11,10 +11,10 @@ script:
   - git diff $build_head $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST_BRANCH
   - echo $TRAVIS_PULL_REQUEST
-  - objBranch=$TRAVIS_BRANCH
+  - export objBranch=$TRAVIS_BRANCH
   -  |
      if [ ${TRAVIS_PULL_REQUEST} != false ]; then
-       objBranch=${TRAVIS_PULL_REQUEST_BRANCH}
+       export objBranch=${TRAVIS_PULL_REQUEST_BRANCH}
      fi
   - echo $objBranch
   - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./iri-regression-tests/
