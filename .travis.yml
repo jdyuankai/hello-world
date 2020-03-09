@@ -9,3 +9,4 @@ script:
   - git diff $build_head $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST_BRANCH
   - echo $TRAVIS_PULL_REQUEST
+  - GET repo/jdyuankai/branch/$TRAVIS_PULL_REQUEST_BRANCH
