@@ -27,7 +27,7 @@ script:
        echo pr will merge $objBranch to master if existed
        git checkout $objBranch
        git checkout master
-       git merge $objBranch
+       git merge master
      fi
   -  |
      if [ ${TRAVIS_PULL_REQUEST} == false ]; then
