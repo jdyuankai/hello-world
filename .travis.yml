@@ -21,8 +21,8 @@ script:
   - cd iri-regression-tests
   - git ls-remote|grep -E patch|grep -c
   - list=$(git ls-remote)
-  - count=${grep -E $list}
-  - echo $count
+  - count=$(grep -E $objBranch $list)
+  - echo $(grep -c count)
   - echo $TRAVIS_PULL_REQUEST_BRANCH count is $branchCount
   -  |
      if [ $branchCount > 0 ]; then
