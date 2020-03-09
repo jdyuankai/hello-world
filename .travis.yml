@@ -1,6 +1,8 @@
 install: true
 
 script:
+  - git show-ref --verify --quiet refs/heads/jdyuankai-patch-1
+  - echo $?
   - git ls-remote
   - git config user.name
   - git config user.email
