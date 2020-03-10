@@ -1,3 +1,44 @@
+install: true
+
 script:
+  - git ls-remote
   - git config user.name
   - git config user.email
+  - echo "after printed git account"
+  - build_head=$(git rev-parse HEAD)
+  - echo $build_head
+  - echo $TRAVIS_BRANCH
+  - git diff $build_head $TRAVIS_BRANCH
+  - echo $TRAVIS_PULL_REQUEST_BRANCH
+  - echo $TRAVIS_PULL_REQUEST
+  - export objBranch=$TRAVIS_BRANCH
+  -  |
+     if [ ${TRAVIS_PULL_REQUEST} != false ]; then
+       export objBranch=${TRAVIS_PULL_REQUEST_BRANCH}
+     fi
+  - echo $objBranch
+  - git clone --dept=50 https://github.com/triasteam/iri-regression-tests.git ./iri-regression-tests/
+  - cd iri-regression-tests
+  - git ls-remote | grep -E merge | grep -c merge
+  - echo $objBranch
+  - echo $TRAVIS_PULL_REQUEST_BRANCH count is $branchCount
+  - exists=`git show-ref refs/heads/$objBranch` || true
+  - |
+    if [ -n "$exists" ]; then
+      export existBranch=true
+    fi
+  -  |
+     if [ ${existBranch} == true ]; then
+       echo pr will merge $objBranch to master if existed
+       git checkout $objBranch
+       if [ ${TRAVIS_PULL_REQUEST} != false ]; then
+         git checkout master
+         git merge $objBranch || true
+       fi
+     fi
+  -  |
+     if [ ${existBranch} == false ]; then
+       echo push will checkout $objBranch
+       git checkout $objBranch
+     fi
+  - git branch  
