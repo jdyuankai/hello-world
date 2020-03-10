@@ -31,8 +31,10 @@ script:
      if [ ${existBranch} == true ]; then
        echo pr will merge $objBranch to master if existed
        git checkout $objBranch
-       git checkout master
-       git merge $objBranch || true
+       if [ ${TRAVIS_PULL_REQUEST} != false ]; then
+         git checkout master
+         git merge $objBranch || true
+       fi
      fi
   -  |
      if [ ${existBranch} == false ]; then
